@@ -1,4 +1,4 @@
-const GOOGLE_REVIEW_URL = 'https://www.google.com/search?hl=en&q=MACHIDA+SHOTEN+Khalandale+Mall&ludocid=8946686640105235576#lrd=0x310951fe29423461:0x7c290418fc34a478,3,,,';
+const GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place//data=!4m3!3m2!1s0x310951fe29423461:0x7c290418fc34a478!12e1';
 const state = { selections: {}, overall: 0 };
 const screens = ['basic', 'feedback', 'complete'];
 
@@ -34,7 +34,7 @@ function hasBasicSelections() { return ['partySize', 'visitFrequency', 'visitTyp
 
 document.querySelector('#submitBasic').addEventListener('click', () => {
   if (!hasBasicSelections()) { const firstMissing = [...document.querySelectorAll('[data-required-group]')].find(group => !group.querySelector('.is-selected')); firstMissing?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-  if (state.overall >= 4) window.location.href = GOOGLE_REVIEW_URL;
+  if (state.overall >= 4) window.location.assign(GOOGLE_REVIEW_URL);
   else { document.querySelector('#selectedOverall').textContent = summaryStars(state.overall); showScreen('feedback'); }
 });
 document.querySelector('#cancelFeedback').addEventListener('click', () => showScreen('basic'));
