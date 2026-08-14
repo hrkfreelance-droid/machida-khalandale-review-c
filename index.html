@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="km">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -44,85 +44,102 @@
     .post-button:disabled{cursor:wait;opacity:.7}
     @media(max-width:520px){.photo-preview{grid-template-columns:repeat(4,minmax(0,1fr))}}
   </style>
+  <style>
+    .brand-header{position:relative;z-index:30}
+    .language-switcher{position:fixed;right:clamp(12px,5vw,56px);top:12px;display:flex;gap:4px;align-items:center;z-index:100}
+    .language-button{width:30px;height:30px;padding:0;border:1px solid #dadce0;border-radius:50%;background:#fff;cursor:pointer;font-size:16px;line-height:1;opacity:.58}
+    .language-button.is-active{opacity:1;border-color:#1a73e8;box-shadow:0 0 0 2px #e8f0fe}
+    .validation-message{min-height:18px;margin:6px 0 0;color:#d93025;text-align:center;font-size:12px}
+    [lang="km"] body{font-family:Arial,"Noto Sans Khmer",sans-serif}
+    @media(max-width:520px){.language-switcher{right:12px}.language-button{width:28px;height:28px;font-size:15px}}
+  </style>
 </head>
 <body>
   <main class="app-shell">
     <header class="brand-header">
       <img class="brand-logo" src="assets/logo.svg" alt="MACHIDA SHOTEN">
+      <div class="language-switcher" role="group" aria-label="Language selector">
+        <button class="language-button" type="button" data-language="km" aria-label="Khmer" aria-pressed="true">🇰🇭</button>
+        <button class="language-button" type="button" data-language="en" aria-label="English" aria-pressed="false">🇬🇧</button>
+        <button class="language-button" type="button" data-language="zh-CN" aria-label="Simplified Chinese" aria-pressed="false">🇨🇳</button>
+      </div>
     </header>
 
     <section class="screen page-one is-active" id="screen-basic" aria-labelledby="basic-title">
-      <h1 id="basic-title">Tell us about your visit</h1>
-      <p class="intro-copy">Your feedback helps us serve you better.</p>
+      <h1 id="basic-title" data-i18n="landing.title">សូមប្រាប់យើងអំពីការមកទទួលទានរបស់អ្នក</h1>
+      <p class="intro-copy" data-i18n="landing.subtitle">មតិយោបល់របស់អ្នកជួយឱ្យយើងបម្រើអ្នកបានកាន់តែប្រសើរ។</p>
 
-      <div class="question-card" data-required-group="partySize"><h2>Party size</h2><div class="chip-grid"><button class="chip" data-group="partySize">1 person</button><button class="chip" data-group="partySize">2 people</button><button class="chip" data-group="partySize">3–4 people</button><button class="chip" data-group="partySize">5–8 people</button><button class="chip" data-group="partySize">9+ people</button></div></div>
-      <div class="question-card" data-required-group="visitFrequency"><h2>How often do you visit per month?</h2><div class="chip-grid"><button class="chip" data-group="visitFrequency">First time</button><button class="chip" data-group="visitFrequency">1–3 times</button><button class="chip" data-group="visitFrequency">4–8 times</button><button class="chip" data-group="visitFrequency">9–13 times</button><button class="chip" data-group="visitFrequency">14–18 times</button><button class="chip" data-group="visitFrequency">More than 19 times</button></div></div>
-      <div class="question-card" data-required-group="visitType"><h2>Who are you dining with?</h2><div class="chip-grid"><button class="chip" data-group="visitType">On my own</button><button class="chip" data-group="visitType">Couple</button><button class="chip" data-group="visitType">Family</button><button class="chip" data-group="visitType">Friends</button><button class="chip" data-group="visitType">Business</button></div></div>
-      <div class="overall-card"><p>How was your overall experience?</p><div class="overall-stars" data-rating="overall" aria-label="Overall rating"></div><small id="overallHint">Select a rating</small></div>
-      <div class="bottom-action"><button class="button primary full" id="submitBasic" type="button" disabled>Next</button></div>
+      <div class="question-card" data-required-group="partySize"><h2 data-i18n="visit.partySize">ចំនួនអ្នកមកជាមួយ</h2><div class="chip-grid"><button class="chip" data-group="partySize" data-value="1" data-i18n="option.party.1">១ នាក់</button><button class="chip" data-group="partySize" data-value="2" data-i18n="option.party.2">២ នាក់</button><button class="chip" data-group="partySize" data-value="3-4" data-i18n="option.party.3-4">៣–៤ នាក់</button><button class="chip" data-group="partySize" data-value="5-8" data-i18n="option.party.5-8">៥–៨ នាក់</button><button class="chip" data-group="partySize" data-value="9-plus" data-i18n="option.party.9-plus">៩+ នាក់</button></div></div>
+      <div class="question-card" data-required-group="visitFrequency"><h2 data-i18n="visit.visitCount">ចំនួនដងមកទទួលទានក្នុងមួយខែ</h2><div class="chip-grid"><button class="chip" data-group="visitFrequency" data-value="first" data-i18n="option.visit.first">មកលើកដំបូង</button><button class="chip" data-group="visitFrequency" data-value="2-3" data-i18n="option.visit.2-3">២–៣ ដង</button><button class="chip" data-group="visitFrequency" data-value="4-10" data-i18n="option.visit.4-10">៤–១០ ដង</button><button class="chip" data-group="visitFrequency" data-value="11-plus" data-i18n="option.visit.11-plus">១១ ដងឡើងទៅ</button></div></div>
+      <div class="question-card" data-required-group="visitType"><h2 data-i18n="visit.diningWith">អ្នកមកទទួលទានជាមួយអ្នកណា?</h2><div class="chip-grid"><button class="chip" data-group="visitType" data-value="solo" data-i18n="option.dining.solo">ម្នាក់ឯង</button><button class="chip" data-group="visitType" data-value="couple" data-i18n="option.dining.couple">គូស្នេហ៍</button><button class="chip" data-group="visitType" data-value="family" data-i18n="option.dining.family">គ្រួសារ</button><button class="chip" data-group="visitType" data-value="friends" data-i18n="option.dining.friends">មិត្តភក្តិ</button><button class="chip" data-group="visitType" data-value="business" data-i18n="option.dining.business">ការងារ</button></div></div>
+      <div class="question-card" data-required-group="ageGroup"><h2 data-i18n="visit.ageGroup">ក្រុមអាយុ</h2><div class="chip-grid"><button class="chip" data-group="ageGroup" data-value="under-20" data-i18n="option.age.under-20">ក្រោម ២០</button><button class="chip" data-group="ageGroup" data-value="20s" data-i18n="option.age.20s">អាយុ ២០</button><button class="chip" data-group="ageGroup" data-value="30s" data-i18n="option.age.30s">អាយុ ៣០</button><button class="chip" data-group="ageGroup" data-value="40s" data-i18n="option.age.40s">អាយុ ៤០</button><button class="chip" data-group="ageGroup" data-value="50s" data-i18n="option.age.50s">អាយុ ៥០</button><button class="chip" data-group="ageGroup" data-value="60-plus" data-i18n="option.age.60-plus">៦០ ឡើងទៅ</button><button class="chip" data-group="ageGroup" data-value="prefer-not-say" data-i18n="option.age.prefer-not-say">មិនចង់ប្រាប់</button></div></div>
+      <div class="question-card" data-required-group="gender"><h2 data-i18n="visit.gender">ភេទ</h2><div class="chip-grid"><button class="chip" data-group="gender" data-value="male" data-i18n="option.gender.male">ប្រុស</button><button class="chip" data-group="gender" data-value="female" data-i18n="option.gender.female">ស្រី</button><button class="chip" data-group="gender" data-value="other" data-i18n="option.gender.other">ផ្សេងទៀត</button><button class="chip" data-group="gender" data-value="prefer-not-say" data-i18n="option.gender.prefer-not-say">មិនចង់ប្រាប់</button></div></div>
+      <div class="overall-card"><p data-i18n="review.overallQuestion">តើបទពិសោធន៍របស់អ្នកជារួមយ៉ាងដូចម្តេច?</p><div class="overall-stars" data-rating="overall" aria-label="Overall rating" data-i18n-aria="review.overall"></div><small id="overallHint" data-i18n="action.selectRating">ជ្រើសរើសការវាយតម្លៃ</small></div>
+      <div class="bottom-action"><button class="button primary full" id="submitBasic" type="button" disabled data-i18n="action.next">បន្ទាប់</button><p class="validation-message" id="basicValidation" aria-live="polite"></p></div>
     </section>
 
     <section class="screen dark-stage" id="screen-feedback" aria-labelledby="feedback-title" hidden>
-      <div class="feedback-backdrop" aria-hidden="true"><div class="feedback-backdrop__eyebrow">YOUR EXPERIENCE</div><h1>Share your feedback</h1></div>
+      <div class="feedback-backdrop" aria-hidden="true"><div class="feedback-backdrop__eyebrow" data-i18n="review.eyebrow">បទពិសោធន៍របស់អ្នក</div><h1 data-i18n="review.title">ចែករំលែកមតិយោបល់របស់អ្នក</h1></div>
       <div class="review-modal">
-        <header class="review-header"><button class="icon-button" id="cancelFeedback" type="button" aria-label="Back">×</button><div><strong>Machida Shoten Japanese Ramen</strong><span>Khalandale Mall</span></div><span class="header-mark">M</span></header>
+        <header class="review-header"><button class="icon-button" id="cancelFeedback" type="button" aria-label="Back" data-i18n-aria="action.back">×</button><div><strong>Machida Shoten Japanese Ramen</strong><span>Khalandale Mall</span></div><span class="header-mark">M</span></header>
         <div class="review-scroll">
-          <div class="direct-note">Feedback sent privately to MACHIDA SHOTEN</div>
-          <div class="review-rating"><span>Your overall rating</span><strong id="selectedOverall"></strong></div>
-          <h1 id="feedback-title">Share your feedback</h1>
-          <div class="detail-card"><div class="detail-row"><span>Food</span><div class="detail-stars" data-rating="food" aria-label="Food rating"></div></div><div class="detail-row"><span>Service</span><div class="detail-stars" data-rating="service" aria-label="Service rating"></div></div><div class="detail-row"><span>Atmosphere</span><div class="detail-stars" data-rating="atmosphere" aria-label="Atmosphere rating"></div></div></div>
-          <label class="field-label" for="comment">Tell us about your experience at this restaurant</label><textarea id="comment" rows="5" placeholder="Share your thoughts"></textarea>
-          <input class="photo-input" id="photoInput" type="file" accept="image/*" multiple>
-          <button class="photo-button" id="photoButton" type="button"><span aria-hidden="true">＋</span> Add photos and videos</button>
+          <div class="direct-note" data-i18n="review.private">មតិយោបល់នេះនឹងផ្ញើជាសម្ងាត់ទៅ MACHIDA SHOTEN</div>
+          <div class="review-rating"><span data-i18n="review.overall">ការវាយតម្លៃសរុបរបស់អ្នក</span><strong id="selectedOverall"></strong></div>
+          <h1 id="feedback-title" data-i18n="review.title">ចែករំលែកមតិយោបល់របស់អ្នក</h1>
+          <div class="detail-card"><div class="detail-row"><span data-i18n="review.food">ម្ហូបអាហារ</span><div class="detail-stars" data-rating="food" aria-label="Food rating" data-i18n-aria="review.food"></div></div><div class="detail-row"><span data-i18n="review.service">សេវាកម្ម</span><div class="detail-stars" data-rating="service" aria-label="Service rating" data-i18n-aria="review.service"></div></div><div class="detail-row"><span data-i18n="review.atmosphere">បរិយាកាស</span><div class="detail-stars" data-rating="atmosphere" aria-label="Atmosphere rating" data-i18n-aria="review.atmosphere"></div></div></div>
+          <label class="field-label" for="comment" data-i18n="review.commentLabel">ប្រាប់យើងអំពីបទពិសោធន៍របស់អ្នកនៅភោជនីយដ្ឋាននេះ</label><textarea id="comment" rows="5" data-i18n-placeholder="review.commentPlaceholder" placeholder="ចែករំលែកគំនិតរបស់អ្នក"></textarea>
+          <input class="photo-input" id="photoInput" type="file" accept="image/*" multiple tabindex="-1" aria-hidden="true">
+          <button class="photo-button" id="photoButton" type="button"><span aria-hidden="true">＋</span> <span data-i18n="review.addPhotos">បន្ថែមរូបថត និងវីដេអូ</span></button>
           <p class="photo-error" id="photoError" role="alert" aria-live="polite"></p>
           <div class="photo-preview" id="photoPreview" aria-live="polite"></div>
           <p class="photo-count" id="photoCount"></p>
-          <div class="detail-card" data-payload-field="mealType"><h2>What did you get?</h2><div class="chip-grid"><button class="chip detail-chip">Breakfast</button><button class="chip detail-chip">Brunch</button><button class="chip detail-chip">Lunch</button><button class="chip detail-chip">Dinner</button><button class="chip detail-chip">Other</button></div></div>
-          <div class="detail-card" data-payload-field="spendPerPerson"><h2>How much did you spend per person?</h2><div class="chip-grid"><button class="chip detail-chip">$1–5</button><button class="chip detail-chip">$5–10</button><button class="chip detail-chip">$10–15</button><button class="chip detail-chip">$15–20</button><button class="chip detail-chip">$20–25</button><button class="chip detail-chip">$25–30</button><button class="chip detail-chip">$30–35</button><button class="chip detail-chip">$35–40</button><button class="chip detail-chip">$40–45</button><button class="chip detail-chip">$45–50</button><button class="chip detail-chip">$50+</button></div></div>
-          <div class="detail-card" data-payload-field="suitableGroupSizes"><h2>What size group is this place best suited for?</h2><p class="helper">Select all that apply</p><div class="chip-grid"><button class="chip multi-chip">1 person</button><button class="chip multi-chip">2 people</button><button class="chip multi-chip">3–4 people</button><button class="chip multi-chip">5–8 people</button><button class="chip multi-chip">9+ people</button><button class="chip multi-chip">Suitable for all group sizes</button><button class="chip multi-chip">Not sure</button></div></div>
-          <div class="detail-card" data-payload-field="noiseLevel"><h2>How would you describe the noise level?</h2><div class="chip-grid"><button class="chip detail-chip">Very quiet</button><button class="chip detail-chip">Quiet, easy to talk</button><button class="chip detail-chip">Moderate noise</button><button class="chip detail-chip">Loud, but you can still talk</button><button class="chip detail-chip">Very loud, hard to hear</button><button class="chip detail-chip">Not sure</button></div></div>
+          <div class="detail-card" data-payload-field="mealType"><h2 data-i18n="review.whatDidYouGet">តើអ្នកបានទទួលទានអ្វី?</h2><div class="chip-grid"><button class="chip detail-chip" data-value="breakfast" data-i18n="option.meal.breakfast">អាហារពេលព្រឹក</button><button class="chip detail-chip" data-value="brunch" data-i18n="option.meal.brunch">ប្រាន់ជ៍</button><button class="chip detail-chip" data-value="lunch" data-i18n="option.meal.lunch">អាហារថ្ងៃត្រង់</button><button class="chip detail-chip" data-value="dinner" data-i18n="option.meal.dinner">អាហារពេលល្ងាច</button><button class="chip detail-chip" data-value="other" data-i18n="option.meal.other">ផ្សេងទៀត</button></div></div>
+          <div class="detail-card" data-payload-field="spendPerPerson"><h2 data-i18n="review.spending">តើអ្នកចំណាយប៉ុន្មានក្នុងម្នាក់?</h2><div class="chip-grid"><button class="chip detail-chip" data-value="1-5" data-i18n="option.spend.1-5">$១–៥</button><button class="chip detail-chip" data-value="5-10" data-i18n="option.spend.5-10">$៥–១០</button><button class="chip detail-chip" data-value="10-15" data-i18n="option.spend.10-15">$១០–១៥</button><button class="chip detail-chip" data-value="15-20" data-i18n="option.spend.15-20">$១៥–២០</button><button class="chip detail-chip" data-value="20-25" data-i18n="option.spend.20-25">$២០–២៥</button><button class="chip detail-chip" data-value="25-30" data-i18n="option.spend.25-30">$២៥–៣០</button><button class="chip detail-chip" data-value="30-35" data-i18n="option.spend.30-35">$៣០–៣៥</button><button class="chip detail-chip" data-value="35-40" data-i18n="option.spend.35-40">$៣៥–៤០</button><button class="chip detail-chip" data-value="40-45" data-i18n="option.spend.40-45">$៤០–៤៥</button><button class="chip detail-chip" data-value="45-50" data-i18n="option.spend.45-50">$៤៥–៥០</button><button class="chip detail-chip" data-value="50-plus" data-i18n="option.spend.50-plus">$៥០+</button></div></div>
+          <div class="detail-card" data-payload-field="suitableGroupSizes"><h2 data-i18n="review.groupSuitability">កន្លែងនេះសមស្របសម្រាប់ក្រុមទំហំប៉ុន្មាន?</h2><p class="helper" data-i18n="review.selectAll">ជ្រើសរើសបានច្រើន</p><div class="chip-grid"><button class="chip multi-chip" data-value="1" data-i18n="option.group.1">១ នាក់</button><button class="chip multi-chip" data-value="2" data-i18n="option.group.2">២ នាក់</button><button class="chip multi-chip" data-value="3-4" data-i18n="option.group.3-4">៣–៤ នាក់</button><button class="chip multi-chip" data-value="5-8" data-i18n="option.group.5-8">៥–៨ នាក់</button><button class="chip multi-chip" data-value="9-plus" data-i18n="option.group.9-plus">៩+ នាក់</button><button class="chip multi-chip" data-value="all" data-i18n="option.group.all">គ្រប់ទំហំក្រុម</button><button class="chip multi-chip" data-value="not-sure" data-i18n="option.group.not-sure">មិនប្រាកដ</button></div></div>
+          <div class="detail-card" data-payload-field="noiseLevel"><h2 data-i18n="review.noiseLevel">តើអ្នកពិពណ៌នាកម្រិតសំឡេងយ៉ាងដូចម្តេច?</h2><div class="chip-grid"><button class="chip detail-chip" data-value="quiet" data-i18n="option.noise.quiet">ស្ងាត់ណាស់</button><button class="chip detail-chip" data-value="easy" data-i18n="option.noise.easy">ស្ងាត់ ងាយនិយាយ</button><button class="chip detail-chip" data-value="moderate" data-i18n="option.noise.moderate">សំឡេងមធ្យម</button><button class="chip detail-chip" data-value="loud" data-i18n="option.noise.loud">ខ្លាំង ប៉ុន្តែនៅអាចនិយាយបាន</button><button class="chip detail-chip" data-value="veryLoud" data-i18n="option.noise.veryLoud">ខ្លាំងណាស់ ពិបាកស្តាប់</button><button class="chip detail-chip" data-value="not-sure" data-i18n="option.noise.not-sure">មិនប្រាកដ</button></div></div>
           <div class="more-details">
-            <h2>Add more details to help others</h2>
+            <h2 data-i18n="review.addDetails">បន្ថែមព័ត៌មានដើម្បីជួយអ្នកដទៃ</h2>
             <div class="additional-detail-list">
               <section class="accordion" data-question-key="vegetarian-options">
-                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Vegetarian options</span><b aria-hidden="true">⌄</b><small>Tell us about the options available</small></button>
-                <div class="accordion-panel" hidden><textarea rows="4" placeholder="Tell us about the vegetarian options available"></textarea></div>
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-i18n="accordion.vegetarian">ជម្រើសបួស</span><b aria-hidden="true">⌄</b><small data-i18n="accordion.vegetarianHelper">ប្រាប់យើងអំពីជម្រើសដែលមាន</small></button>
+                <div class="accordion-panel" hidden><textarea rows="4" data-i18n-placeholder="accordion.vegetarianPlaceholder" placeholder="ប្រាប់យើងអំពីជម្រើសម្ហូបបួស"></textarea></div>
               </section>
               <section class="accordion" data-question-key="dietary-restrictions">
-                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Dietary restrictions</span><b aria-hidden="true">⌄</b><small>Tell us about the support available</small></button>
-                <div class="accordion-panel" hidden><textarea rows="4" placeholder="Tell us about support for dietary restrictions"></textarea></div>
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-i18n="accordion.dietary">កម្រិតអាហារ</span><b aria-hidden="true">⌄</b><small data-i18n="accordion.dietaryHelper">ប្រាប់យើងអំពីការគាំទ្រដែលមាន</small></button>
+                <div class="accordion-panel" hidden><textarea rows="4" data-i18n-placeholder="accordion.dietaryPlaceholder" placeholder="ប្រាប់យើងអំពីការគាំទ្រសម្រាប់កម្រិតអាហារ"></textarea></div>
               </section>
               <section class="accordion" data-question-key="parking">
-                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Parking</span><b aria-hidden="true">⌄</b><small>Tell us how convenient it was</small></button>
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-i18n="accordion.parking">ចំណតរថយន្ត</span><b aria-hidden="true">⌄</b><small data-i18n="accordion.parkingHelper">ប្រាប់យើងថាងាយស្រួលប៉ុណ្ណា</small></button>
                 <div class="accordion-panel" hidden>
-                  <h3>How easy was it to find parking?</h3>
-                  <div class="chip-grid"><button class="chip detail-chip" type="button">Plenty of parking</button><button class="chip detail-chip" type="button">Parking was somewhat difficult to find</button><button class="chip detail-chip" type="button">Parking was difficult to find</button><button class="chip detail-chip" type="button">Not sure</button></div>
-                  <h3>What parking options are available?</h3>
-                  <p class="helper">Select all that apply</p>
-                  <div class="chip-grid"><button class="chip multi-chip" type="button">Free parking lot</button><button class="chip multi-chip" type="button">Paid parking lot</button><button class="chip multi-chip" type="button">Free street parking</button><button class="chip multi-chip" type="button">Paid street parking</button><button class="chip multi-chip" type="button">Valet parking</button><button class="chip multi-chip" type="button">Free parking garage</button><button class="chip multi-chip" type="button">Paid parking garage</button><button class="chip multi-chip" type="button">Parking unavailable</button></div>
-                  <h3>Other details</h3><textarea rows="4" placeholder="Location, number of parking spaces, etc."></textarea>
+                  <h3 data-i18n="accordion.parkingQuestion">តើការស្វែងរកចំណតងាយស្រួលប៉ុណ្ណា?</h3>
+                  <div class="chip-grid"><button class="chip detail-chip" data-value="plenty" data-i18n="parking.plenty" type="button">មានចំណតគ្រប់គ្រាន់</button><button class="chip detail-chip" data-value="somewhat" data-i18n="parking.somewhat" type="button">ពិបាករកបន្តិច</button><button class="chip detail-chip" data-value="difficult" data-i18n="parking.difficult" type="button">ពិបាករកណាស់</button><button class="chip detail-chip" data-value="not-sure" data-i18n="option.noise.not-sure" type="button">មិនប្រាកដ</button></div>
+                  <h3 data-i18n="accordion.parkingOptions">តើមានជម្រើសចំណតអ្វីខ្លះ?</h3>
+                  <p class="helper" data-i18n="review.selectAll">ជ្រើសរើសបានច្រើន</p>
+                  <div class="chip-grid"><button class="chip multi-chip" data-value="free-lot" data-i18n="parking.freeLot" type="button">ចំណតឥតគិតថ្លៃ</button><button class="chip multi-chip" data-value="paid-lot" data-i18n="parking.paidLot" type="button">ចំណតមានគិតថ្លៃ</button><button class="chip multi-chip" data-value="free-street" data-i18n="parking.freeStreet" type="button">ចតតាមផ្លូវឥតគិតថ្លៃ</button><button class="chip multi-chip" data-value="paid-street" data-i18n="parking.paidStreet" type="button">ចតតាមផ្លូវមានគិតថ្លៃ</button><button class="chip multi-chip" data-value="valet" data-i18n="parking.valet" type="button">ចំណតដោយបុគ្គលិក</button><button class="chip multi-chip" data-value="free-garage" data-i18n="parking.freeGarage" type="button">អគារចតឥតគិតថ្លៃ</button><button class="chip multi-chip" data-value="paid-garage" data-i18n="parking.paidGarage" type="button">អគារចតមានគិតថ្លៃ</button><button class="chip multi-chip" data-value="unavailable" data-i18n="parking.unavailable" type="button">គ្មានចំណត</button></div>
+                  <h3 data-i18n="accordion.otherDetails">ព័ត៌មានផ្សេងទៀត</h3><textarea rows="4" data-i18n-placeholder="accordion.parkingPlaceholder" placeholder="ទីតាំង ចំនួនកន្លែងចត និងព័ត៌មានផ្សេងៗ"></textarea>
                 </div>
               </section>
               <section class="accordion" data-question-key="kid-friendliness">
-                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Kid-friendliness</span><b aria-hidden="true">⌄</b><small>Tell us about your experience</small></button>
-                <div class="accordion-panel" hidden><textarea rows="4" placeholder="Tell us about how suitable this place is for children"></textarea></div>
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-i18n="accordion.kids">ភាពសមស្របសម្រាប់កុមារ</span><b aria-hidden="true">⌄</b><small data-i18n="accordion.kidsHelper">ប្រាប់យើងអំពីបទពិសោធន៍របស់អ្នក</small></button>
+                <div class="accordion-panel" hidden><textarea rows="4" data-i18n-placeholder="accordion.kidsPlaceholder" placeholder="ប្រាប់យើងថាកន្លែងនេះសមស្របសម្រាប់កុមារប៉ុណ្ណា"></textarea></div>
               </section>
               <section class="accordion" data-question-key="wheelchair-accessibility">
-                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Wheelchair accessibility</span><b aria-hidden="true">⌄</b><small>Tell us about the access</small></button>
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-i18n="accordion.wheelchair">ភាពងាយស្រួលសម្រាប់រទេះរុញ</span><b aria-hidden="true">⌄</b><small data-i18n="accordion.wheelchairHelper">ប្រាប់យើងអំពីការចូលប្រើ</small></button>
                 <div class="accordion-panel" hidden>
-                  <div class="chip-grid"><button class="chip multi-chip" type="button">Wheelchair-accessible entrance</button><button class="chip multi-chip" type="button">Wheelchair-accessible restroom</button><button class="chip multi-chip" type="button">Wheelchair-accessible seating</button><button class="chip multi-chip" type="button">Wheelchair-accessible parking</button><button class="chip multi-chip" type="button">Wheelchair-accessible elevator</button><button class="chip multi-chip" type="button">Not sure</button></div>
-                  <h3>Tell us more about the accessibility</h3><textarea rows="4" placeholder="Tell us more about the accessibility"></textarea>
+                  <div class="chip-grid"><button class="chip multi-chip" data-value="entrance" data-i18n="accessibility.entrance" type="button">ច្រកចូលសមស្របសម្រាប់រទេះរុញ</button><button class="chip multi-chip" data-value="restroom" data-i18n="accessibility.restroom" type="button">បន្ទប់ទឹកសមស្របសម្រាប់រទេះរុញ</button><button class="chip multi-chip" data-value="seating" data-i18n="accessibility.seating" type="button">កន្លែងអង្គុយសមស្របសម្រាប់រទេះរុញ</button><button class="chip multi-chip" data-value="parking" data-i18n="accessibility.parking" type="button">ចំណតសមស្របសម្រាប់រទេះរុញ</button><button class="chip multi-chip" data-value="elevator" data-i18n="accessibility.elevator" type="button">ជណ្តើរយន្តសមស្របសម្រាប់រទេះរុញ</button><button class="chip multi-chip" data-value="not-sure" data-i18n="accessibility.notSure" type="button">មិនប្រាកដ</button></div>
+                  <h3 data-i18n="accordion.wheelchairMore">ប្រាប់យើងបន្ថែមអំពីភាពងាយស្រួល</h3><textarea rows="4" data-i18n-placeholder="accordion.wheelchairPlaceholder" placeholder="ប្រាប់យើងបន្ថែមអំពីភាពងាយស្រួល"></textarea>
                 </div>
               </section>
             </div>
           </div>
         </div>
-        <footer class="modal-actions"><span class="submission-status" id="submissionStatus" aria-live="polite"></span><button class="text-button" id="cancelFeedbackBottom" type="button">Cancel</button><button class="post-button" id="postFeedback" type="button">Post</button></footer>
+        <footer class="modal-actions"><span class="submission-status" id="submissionStatus" aria-live="polite"></span><button class="text-button" id="cancelFeedbackBottom" type="button" data-i18n="action.cancel">បោះបង់</button><button class="post-button" id="postFeedback" type="button" data-i18n="action.post">ផ្ញើ</button></footer>
       </div>
     </section>
 
-    <section class="screen complete-screen" id="screen-complete" aria-labelledby="complete-title" hidden><div class="complete-mark">✓</div><p class="step-label">MESSAGE RECEIVED</p><h1 id="complete-title">Thank you for your feedback</h1><p>Your comments will be shared with our team.</p></section>
+    <section class="screen complete-screen" id="screen-complete" aria-labelledby="complete-title" hidden><div class="complete-mark">✓</div><p class="step-label" data-i18n="complete.eyebrow">បានទទួលមតិយោបល់</p><h1 id="complete-title" data-i18n="complete.title">អរគុណសម្រាប់មតិយោបល់របស់អ្នក</h1><p data-i18n="complete.message">មតិយោបល់របស់អ្នកនឹងត្រូវចែករំលែកជាមួយក្រុមការងាររបស់យើង។</p></section>
   </main>
+  <script src="translations.js?v=i18n-v1"></script>
   <script src="submission.js?v=handoff-v3"></script>
   <script src="app.js?v=handoff-v3"></script>
 </body>

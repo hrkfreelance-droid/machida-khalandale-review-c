@@ -1,11 +1,13 @@
-# MACHIDA SHOTEN Khalandale Mall — C案
+# MACHIDA SHOTEN Khalandale Mall — Version C
 
-C案は、PAGE 1の総合評価が4〜5の場合に中間画面を表示せずGoogleレビューURLへ直接遷移し、1〜3の場合だけ店舗向け詳細フィードバック画面を表示する確認用プロトタイプです。
+This is an internal review prototype. Page 1 collects five customer attributes and an overall rating. Ratings 1–3 open the private store feedback flow; ratings 4–5 navigate directly to the existing Google review URL.
 
-ローカル確認：
+The interface supports Khmer (`km`), English (`en`), and Simplified Chinese (`zh-CN`). Khmer is the default language for a first visit. Translation strings are maintained in `translations.js`, while submission values remain language-independent.
+
+## Local preview
 
 ```bash
 python3 -m http.server 4178
 ```
 
-ブラウザで `http://127.0.0.1:4178/` を開いてください。
+Open `http://127.0.0.1:4178/` in a browser.

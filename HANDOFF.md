@@ -18,6 +18,11 @@ Completed in the frontend:
 - ```multipart/form-data``` construction
 - Submission Adapter with Mock mode
 - GitHub Pages static hosting
+- Page 1 collects five customer attributes: party size, visit count, dining companion, age group, and gender.
+- Supported display languages are Khmer (`km`), English (`en`), and Simplified Chinese (`zh-CN`). Khmer is the first-visit default.
+- The translation dictionary is in `translations.js`. Add or edit keyed strings there; do not use translated labels as payload values.
+- Language selection is persisted in browser storage and changing it preserves answers, ratings, comments, photos, and accordion state.
+- `meta.language` records the selected language code in the submission payload.
 
 ## Backend is not connected
 
@@ -54,6 +59,18 @@ The adapter is intentionally isolated in ```submission.js```:
 
 The UI calls only ```submitFeedback```. The frontend does not contain database or email implementation details.
 
+## Language and Step 1 data
+
+The five Page 1 payload fields are:
+
+- `visit.partySize`
+- `visit.visitFrequency`
+- `visit.diningWith`
+- `visit.ageGroup`
+- `visit.gender`
+
+Each option has a language-independent `data-value`. The visible Khmer, English, or Chinese label is presentation text only. Add new translations to the corresponding key in `translations.js` while keeping the internal value unchanged.
+
 ## Request format
 
 The request is ```multipart/form-data```. Do not manually set the ```Content-Type``` header; the browser adds the multipart boundary.
@@ -73,9 +90,11 @@ Current payload shape:
     "location": "Khalandale Mall"
   },
   "visit": {
-    "partySize": "1 person",
-    "visitFrequency": "First time",
-    "diningWith": "On my own"
+    "partySize": "1",
+    "visitFrequency": "first",
+    "diningWith": "solo",
+    "ageGroup": "20s",
+    "gender": "prefer-not-say"
   },
   "rating": {
     "overall": 1,
@@ -107,7 +126,7 @@ Current payload shape:
   "meta": {
     "submittedAt": "ISO-8601 timestamp",
     "userAgent": "browser user agent",
-    "language": "en"
+    "language": "km"
   }
 }
 ```
