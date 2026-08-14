@@ -30,6 +30,20 @@
     .accordion.is-open .accordion-trigger b{transform:rotate(180deg)}
     @media(max-width:520px){.accordion-trigger{padding-left:13px;padding-right:13px}.accordion-panel{padding-left:13px;padding-right:13px}}
   </style>
+  <style>
+    .photo-input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+    .photo-error,.submission-status{display:block;min-height:18px;margin:6px 2px;color:#d93025;font-size:12px}
+    .submission-status{color:#5f6368;text-align:right}
+    .submission-status.is-success{color:#188038}
+    .submission-status.is-error{color:#d93025}
+    .photo-preview{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+    .photo-thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:#f1f3f4;border:1px solid #dadce0}
+    .photo-thumb img{width:100%;height:100%;display:block;object-fit:cover}
+    .photo-remove{position:absolute;top:4px;right:4px;width:24px;height:24px;border:0;border-radius:50%;background:rgba(32,33,36,.78);color:#fff;cursor:pointer;font-size:16px;line-height:1}
+    .photo-count{margin:0;color:#5f6368;font-size:12px}
+    .post-button:disabled{cursor:wait;opacity:.7}
+    @media(max-width:520px){.photo-preview{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  </style>
 </head>
 <body>
   <main class="app-shell">
@@ -58,11 +72,15 @@
           <h1 id="feedback-title">Share your feedback</h1>
           <div class="detail-card"><div class="detail-row"><span>Food</span><div class="detail-stars" data-rating="food" aria-label="Food rating"></div></div><div class="detail-row"><span>Service</span><div class="detail-stars" data-rating="service" aria-label="Service rating"></div></div><div class="detail-row"><span>Atmosphere</span><div class="detail-stars" data-rating="atmosphere" aria-label="Atmosphere rating"></div></div></div>
           <label class="field-label" for="comment">Tell us about your experience at this restaurant</label><textarea id="comment" rows="5" placeholder="Share your thoughts"></textarea>
-          <button class="photo-button" type="button"><span aria-hidden="true">＋</span> Add photos and videos</button>
-          <div class="detail-card"><h2>What did you get?</h2><div class="chip-grid"><button class="chip detail-chip">Breakfast</button><button class="chip detail-chip">Brunch</button><button class="chip detail-chip">Lunch</button><button class="chip detail-chip">Dinner</button><button class="chip detail-chip">Other</button></div></div>
-          <div class="detail-card"><h2>How much did you spend per person?</h2><div class="chip-grid"><button class="chip detail-chip">$1–5</button><button class="chip detail-chip">$5–10</button><button class="chip detail-chip">$10–15</button><button class="chip detail-chip">$15–20</button><button class="chip detail-chip">$20–25</button><button class="chip detail-chip">$25–30</button><button class="chip detail-chip">$30–35</button><button class="chip detail-chip">$35–40</button><button class="chip detail-chip">$40–45</button><button class="chip detail-chip">$45–50</button><button class="chip detail-chip">$50+</button></div></div>
-          <div class="detail-card"><h2>What size group is this place best suited for?</h2><p class="helper">Select all that apply</p><div class="chip-grid"><button class="chip multi-chip">1 person</button><button class="chip multi-chip">2 people</button><button class="chip multi-chip">3–4 people</button><button class="chip multi-chip">5–8 people</button><button class="chip multi-chip">9+ people</button><button class="chip multi-chip">Suitable for all group sizes</button><button class="chip multi-chip">Not sure</button></div></div>
-          <div class="detail-card"><h2>How would you describe the noise level?</h2><div class="chip-grid"><button class="chip detail-chip">Very quiet</button><button class="chip detail-chip">Quiet, easy to talk</button><button class="chip detail-chip">Moderate noise</button><button class="chip detail-chip">Loud, but you can still talk</button><button class="chip detail-chip">Very loud, hard to hear</button><button class="chip detail-chip">Not sure</button></div></div>
+          <input class="photo-input" id="photoInput" type="file" accept="image/*" multiple>
+          <button class="photo-button" id="photoButton" type="button"><span aria-hidden="true">＋</span> Add photos and videos</button>
+          <p class="photo-error" id="photoError" role="alert" aria-live="polite"></p>
+          <div class="photo-preview" id="photoPreview" aria-live="polite"></div>
+          <p class="photo-count" id="photoCount"></p>
+          <div class="detail-card" data-payload-field="mealType"><h2>What did you get?</h2><div class="chip-grid"><button class="chip detail-chip">Breakfast</button><button class="chip detail-chip">Brunch</button><button class="chip detail-chip">Lunch</button><button class="chip detail-chip">Dinner</button><button class="chip detail-chip">Other</button></div></div>
+          <div class="detail-card" data-payload-field="spendPerPerson"><h2>How much did you spend per person?</h2><div class="chip-grid"><button class="chip detail-chip">$1–5</button><button class="chip detail-chip">$5–10</button><button class="chip detail-chip">$10–15</button><button class="chip detail-chip">$15–20</button><button class="chip detail-chip">$20–25</button><button class="chip detail-chip">$25–30</button><button class="chip detail-chip">$30–35</button><button class="chip detail-chip">$35–40</button><button class="chip detail-chip">$40–45</button><button class="chip detail-chip">$45–50</button><button class="chip detail-chip">$50+</button></div></div>
+          <div class="detail-card" data-payload-field="suitableGroupSizes"><h2>What size group is this place best suited for?</h2><p class="helper">Select all that apply</p><div class="chip-grid"><button class="chip multi-chip">1 person</button><button class="chip multi-chip">2 people</button><button class="chip multi-chip">3–4 people</button><button class="chip multi-chip">5–8 people</button><button class="chip multi-chip">9+ people</button><button class="chip multi-chip">Suitable for all group sizes</button><button class="chip multi-chip">Not sure</button></div></div>
+          <div class="detail-card" data-payload-field="noiseLevel"><h2>How would you describe the noise level?</h2><div class="chip-grid"><button class="chip detail-chip">Very quiet</button><button class="chip detail-chip">Quiet, easy to talk</button><button class="chip detail-chip">Moderate noise</button><button class="chip detail-chip">Loud, but you can still talk</button><button class="chip detail-chip">Very loud, hard to hear</button><button class="chip detail-chip">Not sure</button></div></div>
           <div class="more-details">
             <h2>Add more details to help others</h2>
             <div class="additional-detail-list">
@@ -99,12 +117,13 @@
             </div>
           </div>
         </div>
-        <footer class="modal-actions"><button class="text-button" id="cancelFeedbackBottom" type="button">Cancel</button><button class="post-button" id="postFeedback" type="button">Post</button></footer>
+        <footer class="modal-actions"><span class="submission-status" id="submissionStatus" aria-live="polite"></span><button class="text-button" id="cancelFeedbackBottom" type="button">Cancel</button><button class="post-button" id="postFeedback" type="button">Post</button></footer>
       </div>
     </section>
 
     <section class="screen complete-screen" id="screen-complete" aria-labelledby="complete-title" hidden><div class="complete-mark">✓</div><p class="step-label">MESSAGE RECEIVED</p><h1 id="complete-title">Thank you for your feedback</h1><p>Your comments will be shared with our team.</p></section>
   </main>
-  <script src="app.js?v=ca0a298"></script>
+  <script src="submission.js?v=handoff-v3"></script>
+  <script src="app.js?v=handoff-v3"></script>
 </body>
 </html>
