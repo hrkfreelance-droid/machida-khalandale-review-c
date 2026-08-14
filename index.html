@@ -55,6 +55,12 @@
     [lang="km"] body{font-family:Arial,"Noto Sans Khmer",sans-serif}
     @media(max-width:520px){.language-switcher{gap:10px;margin-bottom:10px}.language-button{width:38px;height:38px}}
   </style>
+  <style>
+    @media(max-width:600px){
+      body:has(#screen-feedback:not([hidden])) .brand-header{display:none}
+      #screen-feedback .review-header div span{display:none}
+    }
+  </style>
 </head>
 <body>
   <main class="app-shell">
