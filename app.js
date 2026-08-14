@@ -3,7 +3,7 @@ const state = { selections: {}, overall: 0 };
 const screens = ['basic', 'feedback', 'complete'];
 
 function showScreen(name) {
-  screens.forEach(screen => { const element = document.querySelector(`#screen-${screen}`); const keepBasicBehindFeedback = name === 'feedback' && screen === 'basic'; element.hidden = screen !== name && !keepBasicBehindFeedback; });
+  screens.forEach(screen => { const element = document.querySelector(`#screen-${screen}`); element.hidden = screen !== name; });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
