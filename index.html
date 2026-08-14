@@ -12,6 +12,24 @@
   <style>.question-card,.overall-card{border:0;border-radius:22px;background:#f8f9ff;padding:18px 16px}.question-card h2{font-size:16px;font-weight:400;margin-bottom:14px}.chip{min-height:44px;padding:8px 15px;border-radius:12px;border-color:#dadce0;font-size:15px}.chip.is-selected{background:#e8f0fe;color:#1967d2;border-color:#1a73e8}.overall-card{margin-top:16px}.overall-card p{font-size:17px;font-weight:400}.bottom-action{padding-top:18px}.primary{background:#1a73e8}.review-modal{width:min(100%,580px);border-radius:20px}.review-header{height:72px;flex-basis:72px;justify-content:center;position:relative}.review-header div{text-align:center}.review-header strong{font-size:16px;font-weight:400}.review-header div span{font-size:12px}.review-header .icon-button{position:absolute;left:12px}.header-mark{display:none!important}.direct-note{border:0;border-radius:14px;background:#f8f9ff;padding:12px 14px;color:#202124}.review-scroll{padding:18px 16px 24px}.review-scroll h1{font-size:24px}.detail-card{background:#f8f9ff;border:0;border-radius:22px;padding:18px 16px}.detail-row{min-height:54px;border-bottom:1px solid #dadce0}.detail-stars .star{font-size:30px}.review-scroll textarea{min-height:112px;border:1px solid #9aa0a6;border-radius:8px;background:#fff;font-size:16px;padding:16px}.photo-button{min-height:52px;margin:14px 0;border:0;border-radius:28px;background:#e8f0fe;color:#0b57d0;text-align:center;font-size:16px}.detail-card .chip{background:#fff;border-color:#dadce0;color:#5f6368;border-radius:12px}.detail-card .chip.is-selected{background:#e8f0fe;border-color:#1a73e8;color:#1967d2}.more-details h2{font-size:20px;font-weight:400;margin:18px 2px 12px}.accordion{border:0;border-radius:0;background:#f8f9ff;padding:16px 14px;font-size:16px}.accordion + .accordion{margin-top:4px}.accordion:first-of-type{border-radius:22px 22px 0 0}.accordion:last-of-type{border-radius:0 0 22px 22px}.modal-actions{height:72px;flex-basis:72px}.text-button,.post-button{min-height:44px;border-radius:4px}.post-button{background:#e8eaed;color:#9aa0a6}.post-button:not(:disabled){background:#1a73e8;color:#fff}</style>
   <style>.dark-stage{background:#f5f6f8;padding:16px;overflow:hidden}.dark-stage::before{content:"";position:absolute;inset:0;background:rgba(32,33,36,.58);z-index:1}.feedback-backdrop{position:absolute;inset:0;padding:clamp(24px,7vw,80px) clamp(20px,7vw,96px);color:#202124}.feedback-backdrop__eyebrow{font-size:12px;letter-spacing:.12em;color:#5f6368;font-weight:600}.feedback-backdrop h1{margin:8px 0 0;font-size:clamp(28px,5vw,52px);font-weight:400}.review-modal{position:relative;z-index:2;width:min(100%,600px);height:calc(100dvh - 32px);max-height:calc(100dvh - 32px);box-shadow:0 12px 36px rgba(0,0,0,.28)}.review-scroll{min-height:0;flex:1;overflow-y:auto}@media(max-width:520px){.dark-stage{padding:6px}.review-modal{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);border-radius:20px}}</style>
   <style>.intro-copy{margin:-10px 0 18px;color:#5f6368;font-size:14px;text-align:center}</style>
+  <style>
+    .additional-detail-list{overflow:hidden;border-radius:22px;background:#f8f9ff}
+    .accordion{margin:0;border-top:1px solid #dadce0;border-radius:0!important;background:transparent;padding:0}
+    .accordion:first-child{border-top:0}
+    .accordion-trigger{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;text-align:left;border:0;padding:15px 14px;background:transparent;color:#202124;cursor:pointer}
+    .accordion-trigger span{font-size:16px;line-height:1.3}
+    .accordion-trigger b{grid-column:2;grid-row:1 / span 2;color:#5f6368;font-size:20px;font-weight:400;transition:transform .15s ease}
+    .accordion-trigger small{grid-column:1;color:#5f6368;font-size:12px;line-height:1.35}
+    .accordion-panel{padding:0 14px 16px}
+    .accordion-panel[hidden]{display:none}
+    .accordion-panel textarea{min-height:108px}
+    .accordion-panel h3{margin:4px 0 5px;color:#202124;font-size:14px;font-weight:500}
+    .accordion-panel .helper{margin:0 0 9px}
+    .accordion-panel .chip-grid{gap:7px}
+    .accordion-panel .chip{min-height:40px;padding:7px 12px;font-size:13px}
+    .accordion.is-open .accordion-trigger b{transform:rotate(180deg)}
+    @media(max-width:520px){.accordion-trigger{padding-left:13px;padding-right:13px}.accordion-panel{padding-left:13px;padding-right:13px}}
+  </style>
 </head>
 <body>
   <main class="app-shell">
@@ -45,7 +63,41 @@
           <div class="detail-card"><h2>How much did you spend per person?</h2><div class="chip-grid"><button class="chip detail-chip">$1–5</button><button class="chip detail-chip">$5–10</button><button class="chip detail-chip">$10–15</button><button class="chip detail-chip">$15–20</button><button class="chip detail-chip">$20–25</button><button class="chip detail-chip">$25–30</button><button class="chip detail-chip">$30–35</button><button class="chip detail-chip">$35–40</button><button class="chip detail-chip">$40–45</button><button class="chip detail-chip">$45–50</button><button class="chip detail-chip">$50+</button></div></div>
           <div class="detail-card"><h2>What size group is this place best suited for?</h2><p class="helper">Select all that apply</p><div class="chip-grid"><button class="chip multi-chip">1 person</button><button class="chip multi-chip">2 people</button><button class="chip multi-chip">3–4 people</button><button class="chip multi-chip">5–8 people</button><button class="chip multi-chip">9+ people</button><button class="chip multi-chip">Suitable for all group sizes</button><button class="chip multi-chip">Not sure</button></div></div>
           <div class="detail-card"><h2>How would you describe the noise level?</h2><div class="chip-grid"><button class="chip detail-chip">Very quiet</button><button class="chip detail-chip">Quiet, easy to talk</button><button class="chip detail-chip">Moderate noise</button><button class="chip detail-chip">Loud, but you can still talk</button><button class="chip detail-chip">Very loud, hard to hear</button><button class="chip detail-chip">Not sure</button></div></div>
-          <div class="more-details"><h2>Add more details to help others</h2><button class="accordion" type="button"><span>Vegetarian options</span><b>⌄</b><span class="accordion-content">Tell us about the options available</span></button><button class="accordion" type="button"><span>Dietary restrictions</span><b>⌄</b><span class="accordion-content">Tell us about the support available</span></button><button class="accordion" type="button"><span>Parking</span><b>⌄</b><span class="accordion-content">Tell us how convenient it was</span></button><button class="accordion" type="button"><span>Kid-friendliness</span><b>⌄</b><span class="accordion-content">Tell us about your experience</span></button><button class="accordion" type="button"><span>Wheelchair accessibility</span><b>⌄</b><span class="accordion-content">Tell us about the access</span></button></div>
+          <div class="more-details">
+            <h2>Add more details to help others</h2>
+            <div class="additional-detail-list">
+              <section class="accordion" data-question-key="vegetarian-options">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Vegetarian options</span><b aria-hidden="true">⌄</b><small>Tell us about the options available</small></button>
+                <div class="accordion-panel" hidden><textarea rows="4" placeholder="Tell us about the vegetarian options available"></textarea></div>
+              </section>
+              <section class="accordion" data-question-key="dietary-restrictions">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Dietary restrictions</span><b aria-hidden="true">⌄</b><small>Tell us about the support available</small></button>
+                <div class="accordion-panel" hidden><textarea rows="4" placeholder="Tell us about support for dietary restrictions"></textarea></div>
+              </section>
+              <section class="accordion" data-question-key="parking">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Parking</span><b aria-hidden="true">⌄</b><small>Tell us how convenient it was</small></button>
+                <div class="accordion-panel" hidden>
+                  <h3>How easy was it to find parking?</h3>
+                  <div class="chip-grid"><button class="chip detail-chip" type="button">Plenty of parking</button><button class="chip detail-chip" type="button">Parking was somewhat difficult to find</button><button class="chip detail-chip" type="button">Parking was difficult to find</button><button class="chip detail-chip" type="button">Not sure</button></div>
+                  <h3>What parking options are available?</h3>
+                  <p class="helper">Select all that apply</p>
+                  <div class="chip-grid"><button class="chip multi-chip" type="button">Free parking lot</button><button class="chip multi-chip" type="button">Paid parking lot</button><button class="chip multi-chip" type="button">Free street parking</button><button class="chip multi-chip" type="button">Paid street parking</button><button class="chip multi-chip" type="button">Valet parking</button><button class="chip multi-chip" type="button">Free parking garage</button><button class="chip multi-chip" type="button">Paid parking garage</button><button class="chip multi-chip" type="button">Parking unavailable</button></div>
+                  <h3>Other details</h3><textarea rows="4" placeholder="Location, number of parking spaces, etc."></textarea>
+                </div>
+              </section>
+              <section class="accordion" data-question-key="kid-friendliness">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Kid-friendliness</span><b aria-hidden="true">⌄</b><small>Tell us about your experience</small></button>
+                <div class="accordion-panel" hidden><textarea rows="4" placeholder="Tell us about how suitable this place is for children"></textarea></div>
+              </section>
+              <section class="accordion" data-question-key="wheelchair-accessibility">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span>Wheelchair accessibility</span><b aria-hidden="true">⌄</b><small>Tell us about the access</small></button>
+                <div class="accordion-panel" hidden>
+                  <div class="chip-grid"><button class="chip multi-chip" type="button">Wheelchair-accessible entrance</button><button class="chip multi-chip" type="button">Wheelchair-accessible restroom</button><button class="chip multi-chip" type="button">Wheelchair-accessible seating</button><button class="chip multi-chip" type="button">Wheelchair-accessible parking</button><button class="chip multi-chip" type="button">Wheelchair-accessible elevator</button><button class="chip multi-chip" type="button">Not sure</button></div>
+                  <h3>Tell us more about the accessibility</h3><textarea rows="4" placeholder="Tell us more about the accessibility"></textarea>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
         <footer class="modal-actions"><button class="text-button" id="cancelFeedbackBottom" type="button">Cancel</button><button class="post-button" id="postFeedback" type="button">Post</button></footer>
       </div>

@@ -1,6 +1,13 @@
-const GOOGLE_REVIEW_URL = 'https://www.google.com/search?hl=en&q=MACHIDA+SHOTEN+Khalandale+Mall&ludocid=8946686640105235576#lrd=0x310951fe29423461:0x7c290418fc34a478,3,,,';
+const GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place//data=!4m3!3m2!1s0x310951fe29423461:0x7c290418fc34a478!12e1';
 const state = { selections: {}, overall: 0 };
 const screens = ['basic', 'feedback', 'complete'];
+const ADDITIONAL_DETAIL_QUESTIONS = Object.freeze([
+  { key: 'vegetarian-options', type: 'text' },
+  { key: 'dietary-restrictions', type: 'text' },
+  { key: 'parking', type: 'mixed' },
+  { key: 'kid-friendliness', type: 'text' },
+  { key: 'wheelchair-accessibility', type: 'multi' }
+]);
 
 function showScreen(name) {
   screens.forEach(screen => { const element = document.querySelector(`#screen-${screen}`); element.hidden = screen !== name; });
@@ -40,4 +47,10 @@ document.querySelector('#submitBasic').addEventListener('click', () => {
 document.querySelector('#cancelFeedback').addEventListener('click', () => showScreen('basic'));
 document.querySelector('#cancelFeedbackBottom').addEventListener('click', () => showScreen('basic'));
 document.querySelector('#postFeedback').addEventListener('click', () => showScreen('complete'));
-document.querySelectorAll('.accordion').forEach(row => row.addEventListener('click', () => row.classList.toggle('is-open')));
+document.querySelectorAll('.accordion-trigger').forEach(trigger => trigger.addEventListener('click', () => {
+  const row = trigger.closest('.accordion');
+  const panel = row.querySelector('.accordion-panel');
+  const isOpen = row.classList.toggle('is-open');
+  trigger.setAttribute('aria-expanded', String(isOpen));
+  panel.hidden = !isOpen;
+}));
