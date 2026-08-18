@@ -4,6 +4,8 @@ This is an internal review prototype. Page 1 collects five customer attributes a
 
 The interface supports Khmer (`km`), English (`en`), and Simplified Chinese (`zh-CN`). Khmer is the default language for a first visit. Translation strings are maintained in `translations.js`, while submission values remain language-independent.
 
+**Live preview URL:** [https://hrkfreelance-droid.github.io/machida-khalandale-review-c/](https://hrkfreelance-droid.github.io/machida-khalandale-review-c/)
+
 ## Local preview
 
 ```bash
